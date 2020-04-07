@@ -1,0 +1,439 @@
+Challenge 6: --------------------------------------------------------------------------------
+
+let a = 0;
+function reduce(array, callbackOne, callbackTwo, initialValue) {
+  for (let i = 0; i < array.length; i++) {
+    if (i == 0) {callbackOne(initialValue, array[i]);}
+    
+    else {callbackTwo(array[i]);}
+  }
+ return a;
+}
+
+function addFirst(x,y) { a = x + y; }
+function addRest(z) { a = a + z}
+
+function subFirst(x,y) { a = x - y; }
+function subRest(z) { a = a - z}
+
+reduce([4,1,3], subFirst, subRest, -4)
+
+Challenge 7:--------------------------------------------------------------------------------
+
+var arrayOfArrays = [[1, 5, 8, 12, 15, 60, 50], [3, 60, 6, 12, 8, 50], [5, 85, 12, 50]];
+
+var result = [];
+
+function intersection (input) {
+  
+  for (let i = 0; i < arrayOfArrays[0].length; i++) {
+    let counter = 0;
+  for (let j = 1; j < arrayOfArrays.length; j++) {
+    if (arrayOfArrays[j].includes(arrayOfArrays[0][i])) {
+      counter++;
+    }
+  }
+   if (counter == arrayOfArrays.length -1) {
+     result.push(arrayOfArrays[0][i]);
+   }
+}
+ return result;
+  }
+
+intersection(arrayOfArrays);
+
+Challenge 8:--------------------------------------------------------------------------------
+
+var arrayOfArrays = [[1, 5, 8, 12, 15, 60, 50], [3, 60, 6, 12, 8, 50], [5, 85, 12, 50]];
+
+var result = [];
+
+function intersection (input) {
+  
+  for (let i = 0; i < arrayOfArrays.length; i++) {
+
+  for (let j = 0; j < arrayOfArrays[i].length; j++) {
+    if (!result.includes(arrayOfArrays[i][j])) {
+      result.push(arrayOfArrays[i][j]);
+    }
+  }
+}
+ return result;
+  }
+
+intersection(arrayOfArrays);
+
+Challenge 9:--------------------------------------------------------------------------------
+
+const objOfMatches = (array1, array2, callback) => {
+  var obj = {};
+  
+  for (let i = 0; i < array1.length; i++) {
+    if (callback(array1[i], array2[i])) {
+    obj[array1[i]] = array2[i];
+    }  
+  }
+ return obj;
+}
+
+const checking = (a, b) => {
+  if (b == a*a) {
+    return true;
+  }
+}
+
+const first = [1,2,3,4,5,6,7,8,9,10];
+const second = [1,4,8,16,25,36,50,64,81,99];
+
+objOfMatches(first, second, checking)
+
+Challenge 10:--------------------------------------------------------------------------------
+
+var nums = [1,2,3,4];
+var funcs = [multiply, divide, sum, subtract]
+
+const multiMap = (array, callbackArray) => {
+  var obj = {};
+  
+  for (let i = 0; i < array.length; i++) {
+  obj[array[i]] = callbackArray[i](array[i], array);
+  }
+  return obj; 
+  }
+
+function multiply(num, arr) {
+  let x = [];
+  for (let i = 0; i < arr.length; i++) {
+    x.push(num*arr[i]);
+  }
+  return x;
+}
+function divide(num, arr) {
+  let x = [];
+  for (let i = 0; i < arr.length; i++) {
+    x.push(num/arr[i]);
+  }
+  return x;
+}
+function sum(num, arr) {
+  let x = [];
+  for (let i = 0; i < arr.length; i++) {
+    x.push(num+arr[i]);
+  }
+  return x;
+}
+function subtract(num, arr) {
+  let x = [];
+  for (let i = 0; i < arr.length; i++) {
+    x.push(num-arr[i]);
+  }
+  return x;
+}
+
+multiMap(nums,funcs);
+
+Challenge 11:--------------------------------------------------------------------------------
+
+const objectFilter = (obj, callbackFunc) => {
+  var secondObj = {};
+  var keys = Object.keys(obj);
+  var values = Object.values(obj);
+  
+  for (let i = 0; i < keys.length; i++) {
+    if (values[i] == callbackFunc(keys[i])) {
+      secondObj[keys[i]] = values[i];
+    }
+  }
+   return secondObj;
+}
+
+const isPlural = word => {
+  return word + 's';
+}
+
+var myObject = {
+  pizza : 'pizzas',
+  ballon : 'ballonz',
+  beer : 'beerz',
+  planet : 'planets',
+  cellphone : 'cellphones' }
+
+objectFilter(myObject, isPlural)
+
+Challenge 12:--------------------------------------------------------------------------------
+
+const majority = (array, callback) => {
+  let falseCounter = 0;
+  let trueCounter = 0;
+  for (let i = 0; i < array.length; i++) {
+    if (callback(array[i])) { trueCounter++; }
+    else { falseCounter ++; }
+  }
+  if (falseCounter < trueCounter) { return true; }
+  else { return false; }
+  }
+
+const isNumbEven = number => {
+  if (number % 2 == 0) { return true; }
+}
+
+var arr = [1,2,3,4,5,6,7,8,10];
+
+majority(arr,isNumbEven)
+
+Challenge 13:--------------------------------------------------------------------------------
+
+const prioritize = (array, callback) => {
+  var result = [];
+  for (let i = 0; i < array.length; i++) {
+    if (callback(array[i])) { result.push(array[i]); }
+  }
+  for (let i = 0; i < array.length; i++) {
+    if (!callback(array[i])) { result.push(array[i]); }
+  }
+  return result;
+}
+
+const isNumbEven = number => {
+  if (number%2 == 0) { return true; }
+}
+
+var checkList = [0,1,2,3,4,5,6,7,8,9,10];
+
+prioritize(checkList,isNumbEven)
+
+Challenge 14:--------------------------------------------------------------------------------
+
+const countBy = (array, callback) => {
+  var obj = {};
+  for (let i = 0; i < array.length; i++) {
+    if (obj[callback(array[i])]) { obj[callback(array[i])]++ }
+    else { obj[callback(array[i])] = 1; }
+  }
+  return obj;
+}
+
+const exists = number => {
+  return number*number;
+}
+
+const myList = [1,3,4,8,10,3,8,7,1,1,25,32,34,8,1,1,1,6,15];
+
+countBy(myList, exists)
+
+Challenge 15:--------------------------------------------------------------------------------
+
+const groupBy = (array, callback) => {
+  var obj = {};
+  for (let i = 0; i < array.length; i++) {
+    if (!obj[callback(array[i])]) {
+      obj[callback(array[i])] = [array[i]]
+    }
+    else {obj[callback(array[i])].push(array[i])}
+  }
+  return obj;
+}
+
+const decimals = [1.3, 2.1, 2.4,7.8,5.4,5.8];
+const floored = function(num) { return Math.floor(num); };
+
+groupBy(decimals, floored)
+
+Challenge 16:--------------------------------------------------------------------------------
+
+const goodKeys = (object, callback) => {
+  var result = [];
+  var keys = Object.keys(object);
+  var values = Object.values(object);
+  
+  for (let i = 0; i < keys.length; i++) {
+    if (callback(values[i])) {
+      result.push(keys[i]);
+    }
+  }
+  return result;
+} 
+
+const beginsWithBird = word => {
+  return word.slice(0,4).toLowerCase() === 'bird';
+}
+
+const sunny = { mac: 'priest', dennis: 'calculating', charlie: 'birdlaw', dee: 'bird', frank: 'warthog' };
+
+
+goodKeys(sunny, beginsWithBird);
+
+Challenge 17:--------------------------------------------------------------------------------
+
+const commutative = (callbackOne, callbackTwo, value) => {
+  if ((callbackOne(callbackTwo(value))) == (callbackTwo(callbackOne(value)))) { return true }
+  else { return false }
+}
+
+const multBy3 = n => n * 3;
+const divBy4 = n => n / 4;
+const subtract5 = n => n - 5;
+console.log(commutative(multBy3, divBy4, 11)); // should log: true
+console.log(commutative(multBy3, subtract5, 10)); // should log: false
+console.log(commutative(divBy4, subtract5, 48)); // should log: false
+
+Challenge 18:--------------------------------------------------------------------------------
+
+const objFilter = (object, callback) => {
+  var result = {};
+   var keys = Object.keys(object);
+   var values = Object.values(object);
+  for (let i = 0; i < keys.length; i++) {
+  if (callback(keys[i]) == values[i]) {
+    result[keys[i]] = values[i];
+  }
+  }
+  return result;
+}
+
+
+
+const startingObj = {6: 3, 2: 1, 12: 4, 24: 12, 13: 3};
+
+const half = n => n / 2;
+console.log(objFilter(startingObj, half));
+
+Challenge 19:--------------------------------------------------------------------------------
+
+const rating = (funcsArray, value) => {
+  let f = 0;
+  let t = 0;
+  
+  for (let i = 0; i < funcsArray.length; i++) {
+    if (funcsArray[i](value)) { t++ }
+    else { f++ }
+  }
+  var result = 100*t/(f+t);
+  
+  console.log(`The percentage of functions from the array that return true when the value is used as input is ${result}`)
+}
+
+const isEven = n => n % 2 === 0;
+const greaterThanFour = n => n > 4;
+const isSquare = n => Math.sqrt(n) % 1 === 0;
+const hasSix = n => n.toString().includes('6');
+const checks = [isEven, greaterThanFour, isSquare, hasSix];
+console.log(rating(checks, 64)); // should log: 100
+console.log(rating(checks, 66)); // should log: 75
+
+Challenge 20:--------------------------------------------------------------------------------
+
+function pipe(arrOfFuncs, value) {
+  var argumentArray = [];
+  argumentArray.push(arrOfFuncs[0](value));
+  for (let i = 1; i < arrOfFuncs.length; i++) {
+    argumentArray.push(arrOfFuncs[i](argumentArray[i-1]))
+  }
+  var lastItem = argumentArray[argumentArray.length-1]
+  return lastItem;
+}
+
+const capitalize = str => str.toUpperCase();
+const addLowerCase = str => str + str.toLowerCase();
+const repeat = str => str + str;
+const capAddlowRepeat = [capitalize, addLowerCase, repeat];
+console.log(pipe(capAddlowRepeat, 'cat')); // should log: 'CATcatCATcat'
+
+Challenge 21:--------------------------------------------------------------------------------
+
+const highestFunc = (objOfFuncs, subject) => {
+  var x = Object.keys(objOfFuncs);
+  var y = Object.values(objOfFuncs);
+  var resultArray = [];
+  
+  for (let i = 0; i < x.length; i++) {
+    resultArray.push(y[i](subject));
+  }
+  
+  // determining the max value inside the array:
+  var max = Math.max.apply(null, resultArray);
+
+  //returning the key(function) that yielded the highest value:
+  return x[resultArray.indexOf(max)];
+
+
+}
+
+const groupOfFuncs = {};
+groupOfFuncs.double = n => n * 2;
+groupOfFuncs.addTen = n => n + 10;
+groupOfFuncs.inverse = n => n * -1;
+console.log(highestFunc(groupOfFuncs, 5)); // should log: 'addTen'
+console.log(highestFunc(groupOfFuncs, 11)); // should log: 'double'
+console.log(highestFunc(groupOfFuncs, -20)); // should log: 'inverse'
+
+Challenge 22:--------------------------------------------------------------------------------
+
+ const combineOperations = (startingValue, arrayOfFuncs) => {
+   var currentResult = [];
+   currentResult.push(arrayOfFuncs[0](startingValue));
+   for (let i = 1; i < arrayOfFuncs.length; i++) {
+     currentResult.push(arrayOfFuncs[i](currentResult[i-1]));
+   }
+   var x = currentResult.length-1;
+   return currentResult[x];
+ }
+ 
+ function add100(num) {
+  return num + 100;
+}
+
+ function add10(num) {
+  return num + 10;
+}
+
+function divByFive(num) {
+  return num / 5;
+}
+
+function multiplyByThree(num) {
+  return num * 3;
+}
+
+console.log(combineOperations(0, [add100, divByFive, multiplyByThree])); // Should output 60 -->
+console.log(combineOperations(0, [divByFive, multiplyByThree, add10])); // Should output 10
+
+Challenge 23:--------------------------------------------------------------------------------
+
+const myFunc = (array, callback) => {
+ 
+  var arrayOfTrueIndex = [];
+  for (let i = 0; i < array.length; i++) {
+     if (callback(array[i])) {
+       arrayOfTrueIndex.push(i);
+     }
+  }
+  if (arrayOfTrueIndex.length == 0) { return -1 }
+  else { return arrayOfTrueIndex }
+}
+
+const numbers = [2, 3, 6, 64, 8, 12];
+const evens = [2, 4, 6, 8, 10, 12, 64];
+
+function isOdd(num) { return (num % 2 !== 0); }
+
+console.log(myFunc(numbers, isOdd)); // Output should be 1 (returned inside an array because there could be more odd numbers inside 'numbers' array)
+console.log(myFunc(evens, isOdd)); // Output should be -1
+
+Challenge 24:--------------------------------------------------------------------------------
+
+const myForEach = (array, callback) => {
+  for (let i = 0; i < array.length; i++) {
+    callback(array[i]);
+  }
+}
+
+let sum = 0;
+
+function addToSum(num) {
+  sum += num;
+}
+
+const nums = [1, 2, 3];
+myForEach(nums, addToSum);
+console.log(sum); // Should output 6

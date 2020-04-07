@@ -1,3 +1,73 @@
+challenge 1:--------------------------------------------------------------------------------
+
+const addTwo = input => {
+  return input + 2;
+}
+console.log(addTwo(3));
+console.log(addTwo(10));
+
+challenge 2:--------------------------------------------------------------------------------
+
+const addS = word => {
+  return word + 's';
+}
+console.log(addS('pizza'));
+console.log(addS('bagel'));
+
+challenge 3:--------------------------------------------------------------------------------
+
+const map = (array, callback) => {
+  var result = [];
+  for (let i = 0; i < array.length; i++){
+    result.push(callback(array[i]));
+  }
+  return result;
+}
+
+const addTwo = input => {
+  return input + 2;
+}
+const multiplyByTwo = input => {
+  return input * 2;
+}
+console.log(map([1, 2, 3], addTwo));
+console.log(map([1, 2, 3], multiplyByTwo));
+
+challenge 4:--------------------------------------------------------------------------------
+
+var alphabet = '';
+
+const forEach = (array, callback) => {
+  for (let i = 0; i < array.length; i++) {
+    callback(array[i]);
+  }
+}
+
+const addLetter = input => {
+  alphabet += input;
+}
+
+const letters = ['a', 'b', 'c', 'd'];
+forEach(letters, addLetter)
+
+console.log(alphabet);
+
+challenge 5:--------------------------------------------------------------------------------
+
+var alphabet = '';
+const letters = ['a', 'b', 'c', 'd'];
+
+const mapWith = (array, callback) => {
+  array.forEach(callback);
+  }
+
+const addLetter = input => {
+  alphabet += input;
+}
+
+mapWith(letters, addLetter);
+console.log(alphabet);
+
 Challenge 6: --------------------------------------------------------------------------------
 
 let a = 0;
